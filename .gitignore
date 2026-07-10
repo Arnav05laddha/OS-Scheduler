@@ -1,0 +1,14 @@
+# Workload data
+data.csv
+
+# Compiled executables
+*.exe
+sched
+
+# CMake build outputs and caches
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+build/
+.cmake/
