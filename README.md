@@ -2,25 +2,6 @@
 
 A high-performance C++ framework for simulating and benchmarking various CPU scheduling algorithms. The system simulates online arrival events loaded from a CSV workload, tracks process execution history (turnaround time, wait time, CPU utilization, and throughput), and visualizes the resulting execution schedule as a Gantt chart.
 
-## Framework Architecture
-
-The framework is structured as follows:
-
-1. **Base Scheduler (`Scheduler`)** — Defined in [process.hpp](file:///c:/MY%20Code/CP/mycp/algos/scheduling_algos/process.hpp):
-   - Uses the **Curiously Recurring Template Pattern (CRTP)** to hoist common simulation state variables (`cur_`, `has_`, `t_`, `idle_`, `done_`, `gantt_`, `seg_`, and `run_`) and common methods (such as `time()` and `finalize()`) to the base class.
-   - Eliminates redundant logic and boilerplates across different algorithms.
-2. **Simulation Driver (`run_online`)** — Defined in [process.hpp](file:///c:/MY%20Code/CP/mycp/algos/scheduling_algos/process.hpp):
-   - Sorts incoming processes by arrival time and simulates clock ticks.
-   - Feeds arrival events dynamically to the scheduler and executes steps until all queues are empty.
-   - Uses **move semantics** (`std::move`) to minimize memory allocation and structure copies.
-3. **CSV Workload Loader (`load_csv`)** — Defined in [loader.hpp](file:///c:/MY%20Code/CP/mycp/algos/scheduling_algos/loader.hpp):
-   - Parses a CSV database of processes (`pid, arrival_time, burst_time, priority`).
-   - Built with **exception-safe parsing** to catch conversion issues or blank fields and skip malformed lines gracefully.
-4. **Benchmarking Suite (`bench.hpp`)** — Defined in [bench.hpp](file:///c:/MY%20Code/CP/mycp/algos/scheduling_algos/bench.hpp):
-   - Runs the simulation over multiple iterations to measure execution wall-clock time (`Wall(us)`), average turnaround time (TAT), average wait time, throughput, and CPU utilization.
-   - Renders a comparison table of all scheduler algorithms.
-
----
 
 ## Supported Scheduling Algorithms
 
